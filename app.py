@@ -1,14 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template_string, request
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 from datetime import datetime
-import plotly.express as px
-import warnings
-
-# Ignore all warnings
-warnings.filterwarnings("ignore")
 
 app = Flask(__name__)
 
@@ -88,7 +81,40 @@ def index():
     if request.method == 'POST':
         choice = request.form['choice']
         result = data_analysis_choice(choice)
-    return render_template('index.html', result=result)
+
+    # HTML code with form and result display
+    html_content = f'''
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Uber Data Analysis</title>
+    </head>
+    <body>
+        <h1>Uber Data Analysis</h1>
+        <form method="POST">
+            <label for="choice">Choose an analysis:</label>
+            <select name="choice" id="choice">
+                <option value="a">Total Trips</option>
+                <option value="b">Trips Breakdown</option>
+                <option value="c">Most Layoffs</option>
+                <option value="d">Product Type Breakdown</option>
+                <option value="e">Avg. Fare & Distance</option>
+                <option value="f">Days of the Week</option>
+                <option value="g">Longest/Shortest Ride</option>
+                <option value="h">Avg. Lead Time</option>
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+        <div>
+            <h3>Analysis Result:</h3>
+            <p>{result}</p>
+        </div>
+    </body>
+    </html>
+    '''
+    return render_template_string(html_content)
 
 if __name__ == "__main__":
     app.run(debug=True)
