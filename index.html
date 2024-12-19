@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uber Data Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .query-form {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Uber Data Analysis</h1>
+        <form method="POST" class="query-form">
+            <label for="choice">Select a query:</label>
+            <select name="choice" id="choice">
+                <option value="a">How many times have I traveled in the past?</option>
+                <option value="b">How many trips were completed or canceled?</option>
+                <option value="c">Where did most of the layoffs take place?</option>
+                <option value="d">What type of product is most often selected?</option>
+                <option value="e">How much is the fare, distance, amount, and time spent on the ride?</option>
+                <option value="f">Which days of the week have the highest number of rides per kilometer?</option>
+                <option value="g">Which is the longest/shortest and most expensive/cheapest ride?</option>
+                <option value="h">What is the average lead time before requesting a trip?</option>
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+
+        <div class="result">
+            <h3>Results:</h3>
+            <div>{{ result | safe }}</div>
+        </div>
+    </div>
+</body>
+</html>
